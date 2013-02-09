@@ -1,4 +1,11 @@
 LoginCounter::Application.routes.draw do
+  # resources :users
+
+  post '/users/login'
+  post '/users/add'
+  match '/TESTAPI/resetFixture' => 'users#reset', via: :post
+  match '/TESTAPI/unitTests' => 'users#unitTests', via: :post
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
