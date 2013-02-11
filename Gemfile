@@ -23,7 +23,7 @@ end
 
 gem 'jquery-rails'
 
-group :development, :test do
+group :production, :development, :test do
   gem 'rspec-rails'
 end
 
