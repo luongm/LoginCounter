@@ -53,5 +53,11 @@ class UsersController < ApplicationController
 
   # POST /TESETAPI/unitTests
   def unitTests
+    output = `rspec`
+    total = /(\d+) example[s]/.match(output)[1]
+    failed = /(\d+) failure[s]/.match(output)[1]
+    respond_to do |format|
+      format.json { render json: {totalTests: total, nrFailed: failed, output: output} }
+    end
   end
 end
