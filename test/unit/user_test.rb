@@ -22,15 +22,15 @@ class UserTest < ActiveSupport::TestCase
 		assert !@user.save, "username can't be shorter than 128 characters"
 	end
 
-	test "password can't be null" do
+	test "password can be null" do
 		@user.username = "gau"
-		assert !@user.save, "password can't be saved as null"
+		assert @user.save, "password can be saved as null"
 	end
 
-	test "password can't be empty" do
+	test "password can be empty" do
 		@user.username = "gau"
 		@user.password = ""
-		assert !@user.save, "username can't be saved as empty"
+		assert @user.save, "username can be saved as an empty string"
 	end
 
 	test "password can't be longer than 128 characters" do
