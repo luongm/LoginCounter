@@ -3,16 +3,16 @@ class UsersController < ApplicationController
   def login
     user = User.where("username = ? AND password = ?", params[:user], (params[:password] or ""))[0]
     if user.nil?
-      err_code = -1 # ERR_BAD_CREDENTIALS
+      errCode = -1 # ERR_BAD_CREDENTIALS
       respond_to do |format|
-        format.json { render json: {err_code: err_code} }
+        format.json { render json: {errCode: errCode} }
       end
     else
       user.count += 1
       user.save
-      err_code = 1 # SUCCESS
+      errCode = 1 # SUCCESS
       respond_to do |format|
-        format.json { render json: {err_code: err_code, count: user.count} }
+        format.json { render json: {errCode: errCode, count: user.count} }
       end
     end
   end
@@ -24,21 +24,21 @@ class UsersController < ApplicationController
     user.password = params[:password]
     user.count = 1
     
-    err_code = 1 # SUCCESS
+    errCode = 1 # SUCCESS
     if user.save
       respond_to do |format|
-        format.json { render json: {err_code: err_code, count: 1} }
+        format.json { render json: {errCode: errCode, count: 1} }
       end
     else
       if user.username.nil? or user.username == "" or user.username.length > 128
-        err_code = -3 # ERR_BAD_USERNAME
+        errCode = -3 # ERR_BAD_USERNAME
       elsif user.password.length > 128
-        err_code = -4 # ERR_BAD_PASSWORD
+        errCode = -4 # ERR_BAD_PASSWORD
       else
-        err_code = -2 # ERR_USER_EXISTS
+        errCode = -2 # ERR_USER_EXISTS
       end
       respond_to do |format|
-        format.json { render json: {err_code: err_code} }
+        format.json { render json: {errCode: errCode} }
       end
     end
   end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   def reset
     User.delete_all
     respond_to do |format|
-      format.json { render json: {err_code: 1} }
+      format.json { render json: {errCode: 1} }
     end
   end
 
