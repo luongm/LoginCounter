@@ -1,0 +1,10 @@
+<h1>Welcome</h1>
+
+<%= form_tag("/users/home") do %>
+	<%= label_tag :user, 'Username: ' %>
+	<%= text_field_tag :user %><br />
+	<%= label_tag :password, 'Password: ' %>
+	<%= text_field_tag :password %><br />
+	<%= submit_tag 'Login' %>
+	<%= submit_tag 'Add' %>
+<% end %>
