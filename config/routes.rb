@@ -1,8 +1,10 @@
 LoginCounter::Application.routes.draw do
   # resources :users
 
-  post '/users/login'
-  post '/users/add'
+  root  :to => "users#home"
+  post  '/users/home' # match '/home' => 'users#home', via: :get
+  post  '/users/login'
+  post  '/users/add'
   match '/TESTAPI/resetFixture' => 'users#reset', via: :post
   match '/TESTAPI/unitTests' => 'users#unitTests', via: :post
 
